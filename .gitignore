@@ -1,0 +1,4 @@
+.idea/
+venv/
+.ropeproject/
+__pycache__/
