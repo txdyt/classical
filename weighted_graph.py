@@ -2,7 +2,7 @@ from typing import TypeVar, Generic, List, Tuple
 from graph import Graph
 from weighted_edge import WeightedEdge
 
-V = TypeVar('V')  # type of the vertices in the graph
+V = TypeVar("V")  # type of the vertices in the graph
 
 
 class WeightedGraph(Generic[V], Graph[V]):
@@ -19,8 +19,9 @@ class WeightedGraph(Generic[V], Graph[V]):
         v: int = self._vertices.index(second)
         self.add_edge_by_indices(u, v, weight)
 
-    def neighbors_for_index_with_weights(self, index: int) -> List[
-        Tuple[V, float]]:
+    def neighbors_for_index_with_weights(
+        self, index: int
+    ) -> List[Tuple[V, float]]:
         distance_tuples: List[Tuple[V, float]] = []
         for edge in self.edges_for_index(index):
             distance_tuples.append((self.vertex_at(edge.v), edge.weight))
@@ -34,22 +35,25 @@ class WeightedGraph(Generic[V], Graph[V]):
 
 
 if __name__ == "__main__":
-    city_graph2: WeightedGraph[str] = WeightedGraph([
-        "Seattle",
-        "San Francisco",
-        "Los Angeles",
-        "Riverside",
-        "Phoenix",
-        "Chicago",
-        "Boston",
-        "New York",
-        "Atlanta",
-        "Miami",
-        "Dallas",
-        "Houston",
-        "Detroit",
-        "Philadelphia",
-        "Washington"])
+    city_graph2: WeightedGraph[str] = WeightedGraph(
+        [
+            "Seattle",
+            "San Francisco",
+            "Los Angeles",
+            "Riverside",
+            "Phoenix",
+            "Chicago",
+            "Boston",
+            "New York",
+            "Atlanta",
+            "Miami",
+            "Dallas",
+            "Houston",
+            "Detroit",
+            "Philadelphia",
+            "Washington",
+        ]
+    )
     city_graph2.add_edge_by_vertices("Seattle", "Chicago", 1737)
     city_graph2.add_edge_by_vertices("Seattle", "San Francisco", 678)
     city_graph2.add_edge_by_vertices("San Francisco", "Riverside", 386)
