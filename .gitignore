@@ -2,3 +2,4 @@
 venv/
 .ropeproject/
 __pycache__/
+.vscode/
