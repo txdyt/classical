@@ -95,9 +95,7 @@ class Node(Generic[T]):
 
 
 def dfs(
-    initial: T,
-    goal_test: Callable[[T], bool],
-    successors: Callable[[T], List[T]],
+    initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]
 ) -> Optional[Node[T]]:
     # frontier is where we've yet to go
     frontier: Stack[Node[T]] = Stack()
@@ -150,9 +148,7 @@ class Queue(Generic[T]):
 
 
 def bfs(
-    initial: T,
-    goal_test: Callable[[T], bool],
-    successors: Callable[[T], List[T]],
+    initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]
 ) -> Optional[Node[T]]:
     # frontier is where we've yet to go
     frontier: Queue[Node[T]] = Queue()
@@ -220,15 +216,11 @@ def astar(
             new_cost: float = current_node.cost + 1
             if child not in explored or explored[child] > new_cost:
                 explored[child] = new_cost
-                frontier.push(
-                    Node(child, current_node, new_cost, heuristic(child))
-                )
+                frontier.push(Node(child, current_node, new_cost, heuristic(child)))
     return None  # went through everything and never found goal
 
 
 if __name__ == "__main__":
     print(linear_contains([1, 5, 15, 15, 15, 15, 20], 5))  # True
     print(binary_contains(["a", "d", "e", "f", "z"], "f"))  # True
-    print(
-        binary_contains(["john", "mark", "ronald", "sarah"], "sheila")
-    )  # False
+    print(binary_contains(["john", "mark", "ronald", "sarah"], "sheila"))  # False

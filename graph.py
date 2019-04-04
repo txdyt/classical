@@ -122,8 +122,9 @@ if __name__ == "__main__":
 
     from generic_search import bfs, Node, node_to_path
 
-    bfs_result: Optional[Node[V]] = bfs("Boston", lambda x: x == "Miami",
-                                        city_graph.neighbor_for_vertex)
+    bfs_result: Optional[Node[V]] = bfs(
+        "Boston", lambda x: x == "Miami", city_graph.neighbor_for_vertex
+    )
     if bfs_result is None:
         print("No solution found using breadth-first search")
     else:

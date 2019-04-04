@@ -46,7 +46,9 @@ class GeneticAlgorithm(Generic[C]):
         while len(new_population) < len(self._population):
             # pick the 2 parent
             if self._selection_type == GeneticAlgorithm.SelectionType.ROULETTE:
-                parents: Tuple[C, C] = self._pick_roulette([x.fitness() for x in self._population])
+                parents: Tuple[C, C] = self._pick_roulette(
+                    [x.fitness() for x in self._population]
+                )
             else:
                 parents = self._pick_tournament(len(self._population) // 2)
             # potentially crossover the 2 parents
@@ -58,3 +60,24 @@ class GeneticAlgorithm(Generic[C]):
         if len(new_population) > len(self._population):
             new_population.pop()
         self._population = new_population  # replace reference
+
+    def _mutate(self) -> None:
+        for individual in self._population:
+            if random() < self._mutation_chance:
+                individual.mutate()
+
+    def run(self) -> C:
+        best: C = max(self._population, key=self._fitness_key)
+        for generation in range(self._max_generations):
+            # early exit if we beat threshold
+            if best.fitness() >= self._threshold:
+                return best
+            print(
+                f"Generation {generation} Best {best.fitness()} Avg {mean(map(self._fitness_key, self._population))}"
+            )
+            self._reproduce_and_replace()
+            self._mutate()
+            highest: C = max(self._population, key=self._fitness_key)
+            if highest.fitness() > best.fitness():
+                best = highest  # found a new best
+        return best  # best we found in _max_generations

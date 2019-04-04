@@ -1,5 +1,6 @@
 from typing import TypeVar, Generic, List
-T = TypeVar('T')
+
+T = TypeVar("T")
 
 
 class Stack(Generic[T]):
