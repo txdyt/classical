@@ -18,7 +18,9 @@ class SimpleEquation(Chromosome):
     def random_instance(cls) -> SimpleEquation:
         return SimpleEquation(randrange(100), randrange(100))
 
-    def crossover(self, other: SimpleEquation) -> Tuple[SimpleEquation, SimpleEquation]:
+    def crossover(
+        self, other: SimpleEquation
+    ) -> Tuple[SimpleEquation, SimpleEquation]:
         child1: SimpleEquation = deepcopy(self)
         child2: SimpleEquation = deepcopy(other)
         child1.y = other.y

@@ -73,7 +73,8 @@ class GeneticAlgorithm(Generic[C]):
             if best.fitness() >= self._threshold:
                 return best
             print(
-                f"Generation {generation} Best {best.fitness()} Avg {mean(map(self._fitness_key, self._population))}"
+                f"Generation {generation} Best {best.fitness()}"
+                f" Avg {mean(map(self._fitness_key, self._population))}"
             )
             self._reproduce_and_replace()
             self._mutate()

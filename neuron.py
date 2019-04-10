@@ -11,7 +11,9 @@ class Neuron:
         derivative_activation_function: Callable[[float], float],
     ) -> None:
         self.weights: List[float] = weights
-        self.activation_function: Callable[[float], float] = activation_function
+        self.activation_function: Callable[
+            [float], float
+        ] = activation_function
         self.derivative_activation_function: Callable[
             [float], float
         ] = derivative_activation_function

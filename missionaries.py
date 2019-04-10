@@ -18,7 +18,13 @@ class MCState:
             "On the west bank there are {} missionaries and {} cannibals.\n"
             "On the east bank there are {} missionaries and {} cannibals.\n"
             "The boat is on the {} bank."
-        ).format(self.wm, self.wc, self.em, self.ec, ("west" if self.boat else "east"))
+        ).format(
+            self.wm,
+            self.wc,
+            self.em,
+            self.ec,
+            ("west" if self.boat else "east"),
+        )
 
     def goal_test(self) -> bool:
         return self.is_legal and self.em == MAX_NUM and self.ec == MAX_NUM
@@ -68,14 +74,16 @@ def display_solution(path: List[MCState]):
             print(
                 "{} missionaries and {} cannibals moved from "
                 "the east bank to the west bank.\n".format(
-                    old_state.em - current_state.em, old_state.ec - current_state.ec
+                    old_state.em - current_state.em,
+                    old_state.ec - current_state.ec,
                 )
             )
         else:
             print(
                 "{} missionaries and {} cannibals moved from "
                 "the west bank to the east bank.\n".format(
-                    old_state.wm - current_state.wm, old_state.wc - current_state.wc
+                    old_state.wm - current_state.wm,
+                    old_state.wc - current_state.wc,
                 )
             )
         print(current_state)

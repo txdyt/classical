@@ -50,8 +50,14 @@ class ListCompression(Chromosome):
         child2: ListCompression = deepcopy(other)
         idx1, idx2 = sample(range(len(self.lst)), k=2)
         l1, l2 = child1.lst[idx1], child2.lst[idx2]
-        child1.lst[child1.lst.index(l2)], child1.lst[idx2] = child1.lst[idx2], l2
-        child2.lst[child2.lst.index(l1)], child2.lst[idx1] = child2.lst[idx1], l1
+        child1.lst[child1.lst.index(l2)], child1.lst[idx2] = (
+            child1.lst[idx2],
+            l2,
+        )
+        child2.lst[child2.lst.index(l1)], child2.lst[idx1] = (
+            child2.lst[idx1],
+            l1,
+        )
         return child1, child2
 
     def mutate(self) -> None:  # swap two locations
@@ -59,7 +65,7 @@ class ListCompression(Chromosome):
         self.lst[idx1], self.lst[idx2] = self.lst[idx2], self.lst[idx1]
 
     def __str__(self) -> str:
-        return f"Order: {self.lst} Bytes: {self.bytes_compressed}"
+        return f"Order: {self.lst} Bytes: {self.byte_compressed}"
 
 
 if __name__ == "__main__":

@@ -13,11 +13,14 @@ class Network:
         layer_structure: List[int],
         learning_rate: float,
         activation_function: Callable[[float], float] = sigmoid,
-        derivative_activation_function: Callable[[float], float] = derivative_sigmoid,
+        derivative_activation_function: Callable[
+            [float], float
+        ] = derivative_sigmoid,
     ) -> None:
         if len(layer_structure) < 3:
             raise ValueError(
-                "Error: Should be at least 3 layers (1 input, 1 hidden, 1 output)"
+                "Error: Should be at least 3 layers "
+                "(1 input, 1 hidden, 1 output)"
             )
         self.layers: List[Layer] = []
         # input layer
@@ -43,7 +46,9 @@ class Network:
     # Pushes input data to the first layer, then output from the first
     # as input to the second, second to the third, etc.
     def outputs(self, input: List[float]) -> List[float]:
-        return reduce(lambda inputs, layer: layer.outputs(inputs), self.layers, input)
+        return reduce(
+            lambda inputs, layer: layer.outputs(inputs), self.layers, input
+        )
 
     # Figure out each neuron's changes based on the errors of the output
     # versus the expected outcome
@@ -53,7 +58,9 @@ class Network:
         self.layers[last_layer].calculate_deltas_for_output_layer(expected)
         # calculate delta for hidden layer in reverse order
         for l in range(last_layer - 1, 0, -1):
-            self.layers[l].calculate_deltas_for_hidden_layer(self.layers[l + 1])
+            self.layers[l].calculate_deltas_for_hidden_layer(
+                self.layers[l + 1]
+            )
 
     # backpropagate() doesn't actually change any weights
     # this function uses the deltas calculated in backpropagate() to
@@ -69,10 +76,12 @@ class Network:
 
     # train() uses the results of outputs() run over many inputs and compared
     # against expecteds to feed backpropagate() and update_weights()
-    def train(self, inputs: List[List[float]], expecteds: List[List[float]]) -> None:
+    def train(
+        self, inputs: List[List[float]], expecteds: List[List[float]]
+    ) -> None:
         for location, xs in enumerate(inputs):
             ys: List[float] = expecteds[location]
-            outs: List[float] = self.outputs(xs)
+            _ = self.outputs(xs)
             self.backpropagate(ys)
             self.update_weights()
 

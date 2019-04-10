@@ -43,4 +43,7 @@ if __name__ == "__main__":
     wine_results = wine_network.validate(
         wine_testers, wine_testers_corrects, wine_interpret_output
     )
-    print(f"{wine_results[0]} correct of {wine_results[1]} = {wine_results[2] * 100}%")
+    print(
+        f"{wine_results[0]} correct "
+        f"of {wine_results[1]} = {wine_results[2] * 100}%"
+    )

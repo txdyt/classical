@@ -17,11 +17,13 @@ class Layer:
         self.previous_layer: Optional[Layer] = previous_layer
         self.neurons: List[Neuron] = []
         # the following could all be one large list comprehension
-        for i in range(num_neurons):
+        for _ in range(num_neurons):
             if previous_layer is None:
                 random_weights: List[float] = []
             else:
-                random_weights = [random() for _ in range(len(previous_layer.neurons))]
+                random_weights = [
+                    random() for _ in range(len(previous_layer.neurons))
+                ]
             neuron: Neuron = Neuron(
                 random_weights,
                 learning_rate,
@@ -40,15 +42,21 @@ class Layer:
 
     def calculate_deltas_for_output_layer(self, expected: List[float]) -> None:
         for n in range(len(self.neurons)):
-            self.neurons[n].delta = self.neurons[n].derivative_activation_function(
-                self.neurons[n].output_cache
-            ) * (expected[n] - self.output_cache[n])
+            self.neurons[n].delta = self.neurons[
+                n
+            ].derivative_activation_function(self.neurons[n].output_cache) * (
+                expected[n] - self.output_cache[n]
+            )
 
     def calculate_deltas_for_hidden_layer(self, next_layer: Layer) -> None:
         for index, neuron in enumerate(self.neurons):
-            next_weights: List[float] = [n.weights[index] for n in next_layer.neurons]
+            next_weights: List[float] = [
+                n.weights[index] for n in next_layer.neurons
+            ]
             next_deltas: List[float] = [n.delta for n in next_layer.neurons]
-            sum_weights_and_deltas: float = dot_product(next_weights, next_deltas)
+            sum_weights_and_deltas: float = dot_product(
+                next_weights, next_deltas
+            )
             neuron.delta = (
                 neuron.derivative_activation_function(neuron.output_cache)
                 * sum_weights_and_deltas

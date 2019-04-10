@@ -28,7 +28,9 @@ class CSP(Generic[V, D]):
         for variable in self.variables:
             self.constraints[variable] = []
             if variable not in self.domains:
-                raise LookupError("Every variable should have a domain assigned to it")
+                raise LookupError(
+                    "Every variable should have a domain assigned to it"
+                )
 
     def add_constraint(self, constraint: Constraint[V, D]) -> None:
         for variable in constraint.variables:
@@ -45,13 +47,17 @@ class CSP(Generic[V, D]):
                 return False
         return True
 
-    def backtracking_search(self, assignment: Dict[V, D] = {}) -> Optional[Dict[V, D]]:
+    def backtracking_search(
+        self, assignment: Dict[V, D] = {}
+    ) -> Optional[Dict[V, D]]:
         # assignment is complete if every variable is assigned (our base case)
         if len(assignment) == len(self.variables):
             return assignment
 
         # get all variables in the CSP but not in the assignment
-        unassigned: List[V] = [v for v in self.variables if v not in assignment]
+        unassigned: List[V] = [
+            v for v in self.variables if v not in assignment
+        ]
 
         # get the every possible domain value of the first unassigned variable
         first: V = unassigned[0]

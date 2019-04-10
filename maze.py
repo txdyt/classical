@@ -42,7 +42,9 @@ class Maze:
         self._grid[start.row][start.column] = Cell.START
         self._grid[goal.row][goal.column] = Cell.GOAL
 
-    def _randomly_fill(self, rows: int, columns: int, sparseness: float) -> None:
+    def _randomly_fill(
+        self, rows: int, columns: int, sparseness: float
+    ) -> None:
         for row in range(rows):
             for column in range(columns):
                 if random.uniform(0, 1.0) < sparseness:
@@ -64,14 +66,20 @@ class Maze:
             and self._grid[ml.row + 1][ml.column] != Cell.BLOCKED
         ):
             locations.append(MazeLocation(ml.row + 1, ml.column))
-        if ml.row - 1 >= 0 and self._grid[ml.row - 1][ml.column] != Cell.BLOCKED:
+        if (
+            ml.row - 1 >= 0
+            and self._grid[ml.row - 1][ml.column] != Cell.BLOCKED
+        ):
             locations.append(MazeLocation(ml.row - 1, ml.column))
         if (
             ml.column + 1 < self._columns
             and self._grid[ml.row][ml.column + 1] != Cell.BLOCKED
         ):
             locations.append(MazeLocation(ml.row, ml.column + 1))
-        if ml.column - 1 >= 0 and self._grid[ml.row][ml.column - 1] != Cell.BLOCKED:
+        if (
+            ml.column - 1 >= 0
+            and self._grid[ml.row][ml.column - 1] != Cell.BLOCKED
+        ):
             locations.append(MazeLocation(ml.row, ml.column - 1))
         return locations
 
@@ -110,7 +118,9 @@ if __name__ == "__main__":
     # Test DFS
     m: Maze = Maze()
     print(m)
-    solution1: Optional[Node[MazeLocation]] = dfs(m.start, m.goal_test, m.successors)
+    solution1: Optional[Node[MazeLocation]] = dfs(
+        m.start, m.goal_test, m.successors
+    )
     if solution1 is None:
         print("No solution found using depth-first search!")
     else:
@@ -119,7 +129,9 @@ if __name__ == "__main__":
         print(m)
         m.clear(path1)
     # Test BFS
-    solution2: Optional[Node[MazeLocation]] = bfs(m.start, m.goal_test, m.successors)
+    solution2: Optional[Node[MazeLocation]] = bfs(
+        m.start, m.goal_test, m.successors
+    )
     if solution2 is None:
         print("No solution found using breadth-first search!")
     else:

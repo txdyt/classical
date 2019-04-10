@@ -43,4 +43,7 @@ if __name__ == "__main__":
     iris_results = iris_network.validate(
         iris_testers, iris_testers_corrects, iris_interpret_output
     )
-    print(f"{iris_results[0]} correct of {iris_results[1]} = {iris_results[2] * 100}%")
+    print(
+        f"{iris_results[0]} correct "
+        f"of {iris_results[1]} = {iris_results[2] * 100}%"
+    )

@@ -5,7 +5,9 @@ from kmeans import KMeans
 
 
 class Album(DataPoint):
-    def __init__(self, name: str, year: int, length: float, tracks: float) -> None:
+    def __init__(
+        self, name: str, year: int, length: float, tracks: float
+    ) -> None:
         super().__init__([length, tracks])
         self.name = name
         self.year = year
@@ -33,5 +35,6 @@ if __name__ == "__main__":
     clusters: List[KMeans.Cluster] = kmeans.run()
     for index, cluster in enumerate(clusters):
         print(
-            f"Cluster {index} Avg Length {cluster.centroid.dimensions[0]} Avg Tracks {cluster.centroid.dimensions[1]}: {cluster.points}\n"
+            f"Cluster {index} Avg Length {cluster.centroid.dimensions[0]} Avg"
+            f" Tracks {cluster.centroid.dimensions[1]}: {cluster.points}\n"
         )

@@ -17,7 +17,9 @@ class DijkstraNode:
     def __lt__(self, other: DijkstraNode) -> bool:
         return self.distance < other.distance
 
-    def __eq__(self, other: DijkstraNode) -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(DijkstraNode):
+            return NotImplemented
         return self.distance == other.distance
 
 
@@ -135,6 +137,8 @@ if __name__ == "__main__":
 
     print("Shortest path from Los Angeles to Boston:")
     path: WeightedPath = path_dict_to_path(
-        city_graph2.index_of("Los Angeles"), city_graph2.index_of("Boston"), path_dict
+        city_graph2.index_of("Los Angeles"),
+        city_graph2.index_of("Boston"),
+        path_dict,
     )
     print_weighted_path(city_graph2, path)

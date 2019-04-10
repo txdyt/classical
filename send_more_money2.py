@@ -31,7 +31,9 @@ class SendMoreMoney2(Chromosome):
         shuffle(letters)
         return SendMoreMoney2(letters)
 
-    def crossover(self, other: SendMoreMoney2) -> Tuple[SendMoreMoney2, SendMoreMoney2]:
+    def crossover(
+        self, other: SendMoreMoney2
+    ) -> Tuple[SendMoreMoney2, SendMoreMoney2]:
         child1: SendMoreMoney2 = deepcopy(self)
         child2: SendMoreMoney2 = deepcopy(other)
         idx1, idx2 = sample(range(len(self.letters)), k=2)
@@ -48,7 +50,10 @@ class SendMoreMoney2(Chromosome):
 
     def mutate(self) -> None:  # swap two letters' location
         idx1, idx2 = sample(range(len(self.letters)), k=2)
-        self.letters[idx1], self.letters[idx2] = self.letters[idx2], self.letters[idx1]
+        self.letters[idx1], self.letters[idx2] = (
+            self.letters[idx2],
+            self.letters[idx1],
+        )
 
     def __str__(self) -> str:
         s: int = self.letters.index("S")
